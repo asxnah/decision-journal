@@ -19,7 +19,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "@store/": ["./src/store/*"],
+      "@ui/*": ["./src/shared/ui/*"],
+      "@widgets/*": ["./src/widgets/*"]
     }
   },
   "include": [
