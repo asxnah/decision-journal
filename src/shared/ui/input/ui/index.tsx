@@ -81,7 +81,7 @@ export const Input = ({
     <div className="w-full p-3 bg-white border border-lightgray rounded-md focus-within:border-gray focus-within:transition-colors focus-within:duration-500">
       {type === "input" && (
         <input
-          className="w-full outline-none rounded-md"
+          className="w-full outline-none"
           type={inputType}
           id={id}
           placeholder={placeholder}
@@ -91,7 +91,8 @@ export const Input = ({
       )}
       {type === "textarea" && (
         <textarea
-          className="w-full h-20 resize-none outline-none rounded-md"
+          ref={ref}
+          className="w-full h-20 resize-none outline-none"
           id={id}
           placeholder={placeholder}
           value={value}
