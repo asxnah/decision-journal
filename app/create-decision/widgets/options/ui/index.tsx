@@ -1,0 +1,32 @@
+import { Input } from "@ui/input";
+
+interface OptionsStep {
+  options: string;
+  onChange: (options: string) => void;
+}
+
+export const OptionsStep = ({ options, onChange }: OptionsStep) => {
+  return (
+    <section className="grid gap-5">
+      <h2 className="text-3xl font-semibold">
+        What options
+        <br />
+        are you considering?
+      </h2>
+      <p>List realistic alternatives you could actually choose.</p>
+      <div className="grid gap-2.5">
+        <Input
+          type="textarea"
+          listed
+          id="thoughts"
+          placeholder={`• Accept the new offer\n• Stay in my current role\n• Take a break and reassess`}
+          value={options}
+          onChange={onChange}
+        />
+        <small className="text-sm text-darkgray">
+          2–5 options is usually enough.
+        </small>
+      </div>
+    </section>
+  );
+};
