@@ -15,8 +15,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased p-4 bg-white">
-        <main className="px-5 py-6 border border-lightgray rounded-lg">
+      <body className="h-screen antialiased p-4 bg-white">
+        <main className="h-full px-5 py-6 border border-lightgray rounded-lg">
           <ReduxProvider>{children}</ReduxProvider>
         </main>
       </body>
