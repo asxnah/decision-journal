@@ -20,3 +20,22 @@
 body {
   font-family: "Epilogue", serif;
 }
+
+p,
+label,
+input,
+textarea {
+  line-height: 16px;
+}
+
+small {
+  line-height: 14px;
+}
+
+h1 {
+  line-height: 25px;
+}
+
+h2 {
+  line-height: 29px;
+}

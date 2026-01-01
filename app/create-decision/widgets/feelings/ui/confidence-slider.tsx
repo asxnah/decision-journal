@@ -89,8 +89,8 @@ export const ConfidenceSlider: FC<ConfidenceSliderProps> = ({
         />
       </div>
       <div className="flex justify-between">
-        <p className="text-sm select-none">Not confident at all</p>
-        <p className="text-sm select-none">Very confident</p>
+        <small className="text-sm select-none">Not confident at all</small>
+        <small className="text-sm select-none">Very confident</small>
       </div>
     </div>
   );
