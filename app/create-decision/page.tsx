@@ -45,18 +45,19 @@ export default function CreateDecision() {
     }
   };
 
+  const handleNavigation = (number: 1 | 2 | 3) => {
+    if (number === 2 && decision === "" && thoughts === "") return;
+    if (number === 3 && options === "") return;
+    setStepNumber(number);
+  };
+
   return (
     <section className="h-full flex flex-col justify-between">
       <div>
         <Header
           heading="Create Decision"
           icon={
-            <ProgressBar
-              stepNumber={stepNumber}
-              onClick={(number) => {
-                if (number < stepNumber) setStepNumber(number);
-              }}
-            />
+            <ProgressBar stepNumber={stepNumber} onClick={handleNavigation} />
           }
         />
 
