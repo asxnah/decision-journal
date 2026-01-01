@@ -5,7 +5,7 @@ interface RadioIcon {
 export const RadioIcon = ({ checked }: RadioIcon) => {
   return (
     <svg
-      className="w-full h-full absolute"
+      className="absolute"
       width="18"
       height="18"
       viewBox="0 0 18 18"

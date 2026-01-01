@@ -21,7 +21,7 @@ export const CheckboxList = ({ list, name, onChange }: List) => {
   }, [checkList]);
 
   return (
-    <ul>
+    <ul className="grid gap-3">
       {list.map((li) => {
         const meta = li.toLocaleLowerCase().replaceAll(" ", "-");
         return (

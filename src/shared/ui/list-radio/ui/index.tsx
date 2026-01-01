@@ -18,11 +18,11 @@ export const RadioList = ({ list, name, onChange }: List) => {
   };
 
   return (
-    <ul>
+    <ul className="grid gap-3">
       {list.map((li) => {
         const meta = li.toLocaleLowerCase().replaceAll(" ", "-");
         return (
-          <li key={li} className="flex gap-1.5">
+          <li key={li} className="flex gap-1.5 items-end">
             <div className="w-4.5 h-4.5 relative">
               <input
                 className="w-full h-full opacity-0 absolute z-1 cursor-pointer"
