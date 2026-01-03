@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/store";
 import { RootState } from "@/store/rootReducer";
 import { set } from "@/store/slices/decision";
 
@@ -17,23 +18,23 @@ import { OptionsStep } from "./widgets/options";
 
 export default function CreateDecision() {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const [stepNumber, setStepNumber] = useState<1 | 2 | 3>(1);
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
   const { decision, thoughts, options, confidence } = useSelector(
     (state: RootState) => state.decision.data
   );
 
-  useEffect(() => {
-    if (stepNumber === 1) {
-      setButtonDisabled(decision === "" || thoughts === "");
-    }
-    if (stepNumber === 2) {
-      setButtonDisabled(options === "");
-    }
-    if (stepNumber === 3) {
-      setButtonDisabled(false);
+  const buttonDisabled = useMemo(() => {
+    switch (stepNumber) {
+      case 1:
+        return decision === "" || thoughts === "";
+      case 2:
+        return options === "";
+      case 3:
+        return false;
+      default:
+        return true;
     }
   }, [stepNumber, decision, thoughts, options]);
 
