@@ -11,6 +11,7 @@ interface Input {
   placeholder: string;
   value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
 }
 
 export const Input = ({
@@ -22,6 +23,7 @@ export const Input = ({
   placeholder,
   value,
   onChange,
+  onBlur,
 }: Input) => {
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -101,6 +103,7 @@ export const Input = ({
           value={value}
           onChange={(e) => handleChange(e.target.value)}
           onKeyDown={handleKeyDown}
+          onBlur={onBlur}
         />
       )}
     </div>
