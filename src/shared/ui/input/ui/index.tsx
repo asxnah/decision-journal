@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import { useBulletedText } from "./useBulletedText";
 
 interface InputProps {
-  type?: "input" | "textarea";
-  listed?: boolean;
-  inputType?: "text" | "date";
+  variant?: "input" | "textarea";
+  bulleted?: boolean;
+  inputType?: React.HTMLInputTypeAttribute;
   min?: string;
   id: string;
   placeholder: string;
@@ -15,8 +15,8 @@ interface InputProps {
 }
 
 export const Input = ({
-  type = "input",
-  listed = false,
+  variant = "input",
+  bulleted = false,
   inputType = "text",
   min,
   id,
@@ -25,76 +25,26 @@ export const Input = ({
   onChange,
   onBlur,
 }: InputProps) => {
-  const ref = useRef<HTMLTextAreaElement>(null);
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (!listed) return;
-
-    const el = ref.current!;
-    const { selectionStart, selectionEnd } = el;
-
-    if (e.key === "Enter") {
-      e.preventDefault();
-
-      const before = value.slice(0, selectionStart);
-      const after = value.slice(selectionEnd);
-
-      onChange(`${before}\n• ${after}`);
-
-      requestAnimationFrame(() => {
-        el.selectionStart = el.selectionEnd = selectionStart + 3;
-      });
-    }
-
-    if (e.key === "Backspace") {
-      const lineStart = value.lastIndexOf("\n", selectionStart - 1) + 1;
-      const isBullet = value.slice(lineStart, lineStart + 2) === "• ";
-
-      if (isBullet && selectionStart === lineStart + 2) {
-        e.preventDefault();
-
-        const before = value.slice(0, lineStart);
-        const after = value.slice(selectionEnd);
-
-        onChange(before + after);
-
-        requestAnimationFrame(() => {
-          el.selectionStart = el.selectionEnd = lineStart;
-        });
-      }
-    }
-  };
-
-  const handleChange = (content: string) => {
-    if (!listed) {
-      onChange(content);
-      return;
-    }
-
-    const lines = content.split("\n");
-    onChange(
-      lines
-        .map((line) =>
-          line.startsWith("• ") || line.trim() === "" ? line : "• " + line
-        )
-        .join("\n")
-    );
-  };
+  const { ref, handleKeyDown, handleChange } = useBulletedText(
+    value,
+    onChange,
+    bulleted
+  );
 
   return (
     <div className="w-full p-3 bg-white border border-lightgray rounded-md focus-within:border-gray focus-within:transition-colors focus-within:duration-500">
-      {type === "input" && (
+      {variant === "input" && (
         <input
           className="w-full outline-none"
           type={inputType}
           id={id}
           placeholder={placeholder}
-          min={min}
+          {...(inputType === "date" ? { min } : {})}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
       )}
-      {type === "textarea" && (
+      {variant === "textarea" && (
         <textarea
           ref={ref}
           className="w-full h-20 resize-none outline-none"
@@ -104,6 +54,9 @@ export const Input = ({
           onChange={(e) => handleChange(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={onBlur}
+          aria-label={placeholder}
+          role="textbox"
+          aria-multiline="true"
         />
       )}
     </div>

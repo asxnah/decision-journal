@@ -29,7 +29,7 @@ export const DecisionStep = ({
       <div className="grid gap-2.5">
         <h4 className="">What makes this decision important at this moment?</h4>
         <Input
-          type="textarea"
+          variant="textarea"
           id="thoughts"
           placeholder="I am feeling unfullfilled in my current role"
           value={thoughts}

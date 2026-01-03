@@ -16,8 +16,8 @@ export const OptionsStep = ({ options, onChange }: OptionsStepProps) => {
       <p>List realistic alternatives you could actually choose.</p>
       <div className="grid gap-2.5">
         <Input
-          type="textarea"
-          listed
+          variant="textarea"
+          bulleted
           id="thoughts"
           placeholder={`• Accept the new offer\n• Stay in my current role\n• Take a break and reassess`}
           value={options}
