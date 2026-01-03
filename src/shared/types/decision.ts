@@ -1,6 +1,6 @@
 type ReviewDateType = "preset" | "custom";
 
-interface Decision {
+export interface Decision {
   decision: string;
   thoughts: string;
   options: string;
