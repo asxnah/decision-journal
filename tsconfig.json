@@ -22,7 +22,8 @@
       "@/*": ["./src/*"],
       "@store/": ["./src/store/*"],
       "@ui/*": ["./src/shared/ui/*"],
-      "@widgets/*": ["./src/widgets/*"]
+      "@lib/*": ["./src/shared/lib/*"],
+      "@widgets/*": ["./src/widgets/*"],
     }
   },
   "include": [

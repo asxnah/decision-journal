@@ -11,6 +11,7 @@ const initialState: DecisionData = {
     options: "",
     confidence: 50,
     expectations: "",
+    reviewDateType: "preset",
     reviewDate: "",
   },
 };

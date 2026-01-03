@@ -6,6 +6,7 @@ interface Input {
   type?: "input" | "textarea";
   listed?: boolean;
   inputType?: "text" | "date";
+  min?: string;
   id: string;
   placeholder: string;
   value: string;
@@ -16,6 +17,7 @@ export const Input = ({
   type = "input",
   listed = false,
   inputType = "text",
+  min,
   id,
   placeholder,
   value,
@@ -85,6 +87,7 @@ export const Input = ({
           type={inputType}
           id={id}
           placeholder={placeholder}
+          min={min}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
