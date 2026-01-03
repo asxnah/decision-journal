@@ -8,9 +8,9 @@ interface OptionsStep {
 export const OptionsStep = ({ options, onChange }: OptionsStep) => {
   return (
     <section className="grid gap-5">
-      <h2 className="text-3xl font-semibold">
+      <h2 className="text-3xl font-semibold whitespace-pre-line">
         What options
-        <br />
+        {"\n"}
         are you considering?
       </h2>
       <p>List realistic alternatives you could actually choose.</p>
@@ -22,8 +22,9 @@ export const OptionsStep = ({ options, onChange }: OptionsStep) => {
           placeholder={`• Accept the new offer\n• Stay in my current role\n• Take a break and reassess`}
           value={options}
           onChange={onChange}
+          aria-describedby="options-help"
         />
-        <small className="text-sm text-darkgray">
+        <small className="text-sm text-darkgray" id="options-help">
           2–5 options is usually enough.
         </small>
       </div>

@@ -42,9 +42,9 @@ export default function ReviewDate() {
       <div>
         <Header heading="Review date" />
         <section className="grid gap-5">
-          <h2 className="text-3xl font-semibold">
+          <h2 className="text-3xl font-semibold whitespace-pre-line">
             When should you
-            <br />
+            {"\n"}
             revisit this decision?
           </h2>
           <p>Choose a moment when the outcome will be clearer.</p>
@@ -64,10 +64,11 @@ export default function ReviewDate() {
                 onChange={(value) =>
                   dispatch(set({ key: "reviewDate", value }))
                 }
+                aria-describedby="reviewDate-help"
               />
             )}
           </div>
-          <small className="text-sm text-darkgray">
+          <small className="text-sm text-darkgray" id="reviewDate-help">
             This will unlock the reflection step later.
           </small>
         </section>

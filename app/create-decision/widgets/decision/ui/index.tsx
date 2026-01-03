@@ -15,9 +15,9 @@ export const DecisionStep = ({
 }: DecisionStep) => {
   return (
     <section className="grid gap-5">
-      <h2 className="text-3xl font-semibold">
+      <h2 className="text-3xl font-semibold whitespace-pre-line">
         What decision
-        <br />
+        {"\n"}
         are you facing?
       </h2>
       <Input
@@ -34,8 +34,9 @@ export const DecisionStep = ({
           placeholder="I am feeling unfullfilled in my current role"
           value={thoughts}
           onChange={(value) => onThoughtsChange(value)}
+          aria-describedby="thoughts-help"
         />
-        <small className="text-sm text-darkgray">
+        <small className="text-sm text-darkgray" id="thoughts-help">
           Describe the situation as it is right now. No analysis yet.
         </small>
       </div>

@@ -26,9 +26,9 @@ export default function Expectations() {
       <div>
         <Header heading="Expectations" />
         <section className="grid gap-5">
-          <h2 className="text-3xl font-semibold">
+          <h2 className="text-3xl font-semibold whitespace-pre-line">
             What do you
-            <br />
+            {"\n"}
             expect to happen?
           </h2>
           <p>
@@ -44,8 +44,9 @@ export default function Expectations() {
               onBlur={() =>
                 dispatch(set({ key: "expectations", value: localExpectations }))
               }
+              aria-describedby="expectations-help"
             />
-            <small className="text-sm text-darkgray">
+            <small className="text-sm text-darkgray" id="expectations-help">
               This will be used later to reflect on your decision.
             </small>
           </div>
