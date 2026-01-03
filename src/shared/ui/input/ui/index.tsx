@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-interface Input {
+interface InputProps {
   type?: "input" | "textarea";
   listed?: boolean;
   inputType?: "text" | "date";
@@ -24,7 +24,7 @@ export const Input = ({
   value,
   onChange,
   onBlur,
-}: Input) => {
+}: InputProps) => {
   const ref = useRef<HTMLTextAreaElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {

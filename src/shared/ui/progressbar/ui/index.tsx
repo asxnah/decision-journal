@@ -1,9 +1,9 @@
-interface ProgressBar {
+interface ProgressBarProps {
   stepNumber: 1 | 2 | 3;
   onClick: (stepNumber: 1 | 2 | 3) => void;
 }
 
-export const ProgressBar = ({ stepNumber, onClick }: ProgressBar) => {
+export const ProgressBar = ({ stepNumber, onClick }: ProgressBarProps) => {
   return (
     <svg
       width="76"

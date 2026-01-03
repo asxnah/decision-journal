@@ -1,8 +1,8 @@
-interface RadioIcon {
+interface RadioIconProps {
   checked: boolean;
 }
 
-export const RadioIcon = ({ checked }: RadioIcon) => {
+export const RadioIcon = ({ checked }: RadioIconProps) => {
   return (
     <svg
       className="absolute"

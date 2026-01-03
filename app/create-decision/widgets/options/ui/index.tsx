@@ -1,11 +1,11 @@
 import { Input } from "@ui/input";
 
-interface OptionsStep {
+interface OptionsStepProps {
   options: string;
   onChange: (options: string) => void;
 }
 
-export const OptionsStep = ({ options, onChange }: OptionsStep) => {
+export const OptionsStep = ({ options, onChange }: OptionsStepProps) => {
   return (
     <section className="grid gap-5">
       <h2 className="text-3xl font-semibold whitespace-pre-line">

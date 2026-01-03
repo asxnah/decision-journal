@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { CheckboxIcon } from "./icons/checkbox";
 
-interface List {
+interface CheckboxListProps {
   list: string[];
   name: string;
   onChange: (list: string[]) => void;
 }
 
-export const CheckboxList = ({ list, name, onChange }: List) => {
+export const CheckboxList = ({ list, name, onChange }: CheckboxListProps) => {
   const [checkList, setCheckList] = useState<string[]>([]);
 
   const handleListChange = (checked: boolean, value: string) => {

@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { RadioIcon } from "./icons/radio";
 
-interface List {
+interface RadioListProps {
   list: string[];
   name: string;
   onChange: (data: string) => void;
 }
 
-export const RadioList = ({ list, name, onChange }: List) => {
+export const RadioList = ({ list, name, onChange }: RadioListProps) => {
   const [item, setItem] = useState("");
 
   const handleChange = (li: string) => {

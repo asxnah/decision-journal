@@ -1,11 +1,11 @@
 import { ConfidenceSlider } from "./confidence-slider";
 
-interface OptionsStep {
+interface FeelingsStepProps {
   confidence: number;
   onChange: (confidence: number) => void;
 }
 
-export const FeelingsStep = ({ confidence, onChange }: OptionsStep) => {
+export const FeelingsStep = ({ confidence, onChange }: FeelingsStepProps) => {
   return (
     <section className="grid gap-5">
       <h2 className="text-3xl font-semibold whitespace-pre-line">

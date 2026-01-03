@@ -1,6 +1,6 @@
 import { Input } from "@ui/input";
 
-interface DecisionStep {
+interface DecisionStepProps {
   decision: string;
   thoughts: string;
   onDecisionChange: (decision: string) => void;
@@ -12,7 +12,7 @@ export const DecisionStep = ({
   thoughts,
   onDecisionChange,
   onThoughtsChange,
-}: DecisionStep) => {
+}: DecisionStepProps) => {
   return (
     <section className="grid gap-5">
       <h2 className="text-3xl font-semibold whitespace-pre-line">

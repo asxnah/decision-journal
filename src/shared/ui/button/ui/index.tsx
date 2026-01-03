@@ -1,4 +1,4 @@
-interface Button {
+interface ButtonProps {
   content: string;
   type?: "button" | "submit";
   disabled: boolean;
@@ -10,7 +10,7 @@ export const Button = ({
   type = "button",
   disabled,
   onClick,
-}: Button) => {
+}: ButtonProps) => {
   return (
     <button
       className={`w-full px-5 py-4 font-medium rounded-md ${
