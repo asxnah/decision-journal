@@ -18,7 +18,7 @@ export const CheckboxList = ({ list, name, onChange }: List) => {
 
   useEffect(() => {
     onChange(checkList);
-  }, [checkList]);
+  }, [checkList, onChange]);
 
   return (
     <ul className="grid gap-3">

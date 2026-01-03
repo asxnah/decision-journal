@@ -1,4 +1,4 @@
-import { FC, useRef, useState, useEffect } from "react";
+import { FC, useRef, useState, useEffect, useCallback } from "react";
 
 interface ConfidenceSliderProps {
   value: number;
@@ -20,18 +20,21 @@ export const ConfidenceSlider: FC<ConfidenceSliderProps> = ({
 
   const progress = ((value - min) / (max - min)) * 100;
 
-  const updateValueFromPosition = (clientX: number) => {
-    if (!trackRef.current) return;
+  const updateValueFromPosition = useCallback(
+    (clientX: number) => {
+      if (!trackRef.current) return;
 
-    const rect = trackRef.current.getBoundingClientRect();
-    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-    const percent = (x / rect.width) * 100;
-    const rawValue = min + (percent / 100) * (max - min);
-    const steppedValue = Math.round(rawValue / step) * step;
-    const newValue = Math.max(min, Math.min(max, steppedValue));
+      const rect = trackRef.current.getBoundingClientRect();
+      const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+      const percent = (x / rect.width) * 100;
+      const rawValue = min + (percent / 100) * (max - min);
+      const steppedValue = Math.round(rawValue / step) * step;
+      const newValue = Math.max(min, Math.min(max, steppedValue));
 
-    if (newValue !== value) onChange(newValue);
-  };
+      if (newValue !== value) onChange(newValue);
+    },
+    [min, max, step, value, onChange]
+  );
 
   useEffect(() => {
     const handleMove = (e: MouseEvent | TouchEvent) => {
@@ -54,7 +57,7 @@ export const ConfidenceSlider: FC<ConfidenceSliderProps> = ({
       document.removeEventListener("touchmove", handleMove);
       document.removeEventListener("touchend", handleUp);
     };
-  }, [isDragging, min, max, step, value, onChange]);
+  }, [isDragging, min, max, step, value, onChange, updateValueFromPosition]);
 
   const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
     setIsDragging(true);
