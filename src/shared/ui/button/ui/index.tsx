@@ -1,14 +1,14 @@
 interface ButtonProps {
   content: string;
   type?: "button" | "submit";
-  disabled: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 }
 
 export const Button = ({
   content,
   type = "button",
-  disabled,
+  disabled = false,
   onClick,
 }: ButtonProps) => {
   return (
