@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +19,7 @@ export default function Expectations() {
   const { expectations } = useSelector(
     (state: RootState) => state.decision.data
   );
+  const [localExpectations, setLocalExpectations] = useState(expectations);
 
   return (
     <section className="h-full flex flex-col justify-between">
@@ -37,9 +39,10 @@ export default function Expectations() {
               type="textarea"
               id="expectations"
               placeholder="I expect to feel more motivated and grow faster in a new role"
-              value={expectations}
-              onChange={(value) =>
-                dispatch(set({ key: "expectations", value }))
+              value={localExpectations}
+              onChange={setLocalExpectations}
+              onBlur={() =>
+                dispatch(set({ key: "expectations", value: localExpectations }))
               }
             />
             <small className="text-sm text-darkgray">
