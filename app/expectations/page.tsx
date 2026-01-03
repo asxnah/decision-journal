@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 
 import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/store";
 import { RootState } from "@/store/rootReducer";
 import { set } from "@/store/slices/decision";
 
@@ -12,7 +13,7 @@ import { Header } from "@widgets/header";
 
 export default function Expectations() {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { expectations } = useSelector(
     (state: RootState) => state.decision.data
