@@ -19,7 +19,8 @@ export default function Expectations() {
   const { expectations } = useSelector(
     (state: RootState) => state.decision.data
   );
-  const [localExpectations, setLocalExpectations] = useState(expectations);
+  const [localExpectations, setLocalExpectations] =
+    useState<string>(expectations);
 
   return (
     <section className="h-full flex flex-col justify-between">
