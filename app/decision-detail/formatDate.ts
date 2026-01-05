@@ -1,4 +1,6 @@
 export const formatDate = (isoDate: string) => {
+  if (!isoDate) return "-";
+
   return new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
@@ -7,6 +9,8 @@ export const formatDate = (isoDate: string) => {
 };
 
 export const formatReviewDate = (isoDate: string) => {
+  if (!isoDate) return "-";
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 

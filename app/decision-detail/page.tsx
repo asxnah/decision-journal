@@ -2,6 +2,10 @@
 
 import { useRouter } from "next/navigation";
 
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store";
+import { reset } from "@/store/slices/decision";
+
 import { formatDate, formatReviewDate } from "./formatDate";
 
 import { useSelector } from "react-redux";
@@ -12,6 +16,7 @@ import { Header } from "@widgets/header";
 
 export default function DecisionDetail() {
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
   const decision = useSelector((state: RootState) => state.decision.data);
   let reviewDate;
 
@@ -34,6 +39,11 @@ export default function DecisionDetail() {
       reviewDate = `Review in ${formatReviewDate(decision.reviewDate)}`;
       break;
   }
+
+  const handleFinish = () => {
+    dispatch(reset());
+    router.push("/timeline");
+  };
 
   return (
     <section className="h-full flex flex-col justify-between">
@@ -92,10 +102,7 @@ export default function DecisionDetail() {
         <p className="mt-6">{reviewDate}</p>
       </div>
 
-      <Button
-        content="Save decision"
-        onClick={() => router.push("/timeline")}
-      />
+      <Button content="Save decision" onClick={handleFinish} />
     </section>
   );
 }

@@ -29,8 +29,9 @@ export const decisionSlice = createSlice({
       const { key, value } = action.payload;
       state.data[key] = value;
     },
+    reset: () => initialState,
   },
 });
 
-export const { set } = decisionSlice.actions;
+export const { set, reset } = decisionSlice.actions;
 export default decisionSlice.reducer;
