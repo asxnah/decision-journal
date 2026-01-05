@@ -91,7 +91,7 @@ export default function ReviewDate() {
           dispatch(set({ key: "createdAt", value: today }));
           router.push("/decision-detail");
         }}
-        disabled={reviewDate === ""}
+        disabled={reviewDate.trim() === ""}
       />
     </section>
   );

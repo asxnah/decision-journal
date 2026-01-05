@@ -57,7 +57,7 @@ export default function Expectations() {
       <Button
         content="Next"
         onClick={() => router.push("/review-date")}
-        disabled={localExpectations === ""}
+        disabled={localExpectations.trim() === ""}
       />
     </section>
   );

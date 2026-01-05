@@ -28,9 +28,9 @@ export default function CreateDecision() {
   const buttonDisabled = useMemo(() => {
     switch (stepNumber) {
       case 1:
-        return decision === "" || thoughts === "";
+        return decision.trim() === "" || thoughts.trim() === "";
       case 2:
-        return options === "";
+        return options.trim() === "";
       case 3:
         return false;
       default:
@@ -47,8 +47,8 @@ export default function CreateDecision() {
   };
 
   const handleNavigation = (number: 1 | 2 | 3) => {
-    if (number === 2 && decision === "" && thoughts === "") return;
-    if (number === 3 && options === "") return;
+    if (number === 2 && decision.trim() === "" && thoughts.trim() === "") return;
+    if (number === 3 && options.trim() === "") return;
     setStepNumber(number);
   };
 
