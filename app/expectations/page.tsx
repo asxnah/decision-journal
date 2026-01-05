@@ -36,7 +36,7 @@ export default function Expectations() {
           </p>
           <div className="grid gap-2.5">
             <Input
-              type="textarea"
+              variant="textarea"
               id="expectations"
               placeholder="I expect to feel more motivated and grow faster in a new role"
               value={localExpectations}
@@ -56,7 +56,7 @@ export default function Expectations() {
       <Button
         content="Next"
         onClick={() => router.push("/review-date")}
-        disabled={expectations === ""}
+        disabled={localExpectations === ""}
       />
     </section>
   );
