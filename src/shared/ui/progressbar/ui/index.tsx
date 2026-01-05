@@ -13,7 +13,7 @@ export const ProgressBar = ({ stepNumber, onClick }: ProgressBarProps) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle
-        className="transition-colors duration-500 cursor-pointer"
+        className="transition-colors duration-500"
         cx="6"
         cy="6"
         r="6"
@@ -22,7 +22,7 @@ export const ProgressBar = ({ stepNumber, onClick }: ProgressBarProps) => {
       />
       <rect x="14" y="5" width="16" height="2" rx="1" fill="#CED4DA" />
       <circle
-        className="transition-colors duration-500 cursor-pointer"
+        className="transition-colors duration-500"
         cx="38"
         cy="6"
         r="6"
@@ -31,7 +31,7 @@ export const ProgressBar = ({ stepNumber, onClick }: ProgressBarProps) => {
       />
       <rect x="46" y="5" width="16" height="2" rx="1" fill="#CED4DA" />
       <circle
-        className="transition-colors duration-500 cursor-pointer"
+        className="transition-colors duration-500"
         cx="70"
         cy="6"
         r="6"
