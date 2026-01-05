@@ -8,4 +8,5 @@ export interface Decision {
   expectations: string;
   reviewDateType: ReviewDateType;
   reviewDate: string;
+  createdAt: string;
 }

@@ -1,4 +1,4 @@
-import { Decision } from "@shared-types/decision"; 
+import { Decision } from "@shared-types/decision";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface DecisionData {
@@ -14,6 +14,7 @@ const initialState: DecisionData = {
     expectations: "",
     reviewDateType: "preset",
     reviewDate: "",
+    createdAt: "",
   },
 };
 
