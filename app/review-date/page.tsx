@@ -15,16 +15,23 @@ import { RadioList } from "@ui/list-radio";
 import { Input } from "@ui/input";
 import { Button } from "@ui/button";
 
+type PresetOption = "In 1 month" | "In 3 months" | "In 6 months";
+
 export default function ReviewDate() {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const today = useMemo(() => getTodayISO(), []);
 
-  const CUSTOM_OPTION = "Custom date";
   const { reviewDate, reviewDateType } = useSelector(
     (state: RootState) => state.decision.data
   );
-  const list = ["In 1 month", "In 3 months", "In 6 months", CUSTOM_OPTION];
+  const CUSTOM_OPTION = "Custom date";
+  const PRESET_OPTIONS: PresetOption[] = [
+    "In 1 month",
+    "In 3 months",
+    "In 6 months",
+  ];
+  const list = [...PRESET_OPTIONS, CUSTOM_OPTION];
   const isCustom = reviewDateType === "custom";
 
   const handleRadioChange = (option: string) => {
