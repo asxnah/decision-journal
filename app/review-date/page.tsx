@@ -37,6 +37,16 @@ export default function ReviewDate() {
     }
   };
 
+  const selectedOption = useMemo(() => {
+    if (reviewDateType === "custom") {
+      return CUSTOM_OPTION;
+    }
+    if (list.includes(reviewDate)) {
+      return reviewDate;
+    }
+    return "";
+  }, [reviewDate, reviewDateType]);
+
   return (
     <section className="h-full flex flex-col justify-between">
       <div>
@@ -52,6 +62,7 @@ export default function ReviewDate() {
             <RadioList
               list={list}
               name="review-date"
+              value={selectedOption}
               onChange={handleRadioChange}
             />
             {isCustom && (
@@ -76,7 +87,10 @@ export default function ReviewDate() {
 
       <Button
         content="Next"
-        onClick={() => router.push("/decision-detail")}
+        onClick={() => {
+          dispatch(set({ key: "createdAt", value: today }));
+          router.push("/decision-detail");
+        }}
         disabled={reviewDate === ""}
       />
     </section>
