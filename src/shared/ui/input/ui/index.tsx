@@ -32,7 +32,7 @@ export const Input = ({
   );
 
   return (
-    <div className="w-full p-3 bg-white border border-lightgray rounded-md focus-within:border-gray focus-within:transition-colors focus-within:duration-500">
+    <div className="w-full p-3 bg-white border border-lightgray rounded-md focus-within:border-gray transition-colors duration-500">
       {variant === "input" && (
         <input
           className="w-full outline-none"
