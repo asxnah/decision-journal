@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { reset } from "@/store/slices/decision";
+import { add } from "@/store/slices/decisions";
 
-import { formatDate } from "./formatDate";
+import { formatDate } from "@lib/formatDate";
 import { formatReviewDate } from "@lib/formatReviewDate";
 
 import { useSelector } from "react-redux";
@@ -37,12 +38,15 @@ export default function DecisionDetail() {
       break;
 
     default:
-      reviewDate = `Review in ${formatReviewDate(decision.reviewDate)}`;
+      reviewDate = `Review ${formatReviewDate(
+        decision.reviewDate
+      ).toLowerCase()}`;
       break;
   }
 
   const handleFinish = () => {
     dispatch(reset());
+    dispatch(add(decision));
     router.push("/timeline");
   };
 
