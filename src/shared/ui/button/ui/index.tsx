@@ -15,8 +15,8 @@ export const Button = ({
     <button
       className={`w-full px-5 py-4 font-medium rounded-md ${
         disabled
-          ? "text-darkgray bg-lightgray hover:cursor-not-allowed"
-          : "text-white bg-black hover:cursor-pointer hover:bg-black-hover transition-colors duration-500"
+          ? "text-darkgray bg-lightgray cursor-not-allowed"
+          : "text-white bg-black cursor-pointer hover:bg-black-hover transition-colors duration-500"
       }`}
       type={type}
       disabled={disabled}
