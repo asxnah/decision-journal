@@ -1,3 +1,5 @@
+import { formatDate } from "@lib/formatDate";
+
 export const formatReviewDate = (isoDate: string) => {
   if (!isoDate) return "-";
 
@@ -9,8 +11,16 @@ export const formatReviewDate = (isoDate: string) => {
   const diffMs = target.getTime() - today.getTime();
   const totalDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
 
+  if (totalDays === 0) {
+    return "Today";
+  }
+
+  if (totalDays < 0) {
+    return formatDate(isoDate);
+  }
+
   if (totalDays <= 30) {
-    return totalDays === 1 ? "1 day" : `${totalDays} days`;
+    return totalDays === 1 ? "In 1 day" : `In ${totalDays} days`;
   }
 
   let months =
@@ -34,19 +44,30 @@ export const formatReviewDate = (isoDate: string) => {
     const monthPart = months === 1 ? "1 month" : `${months} months`;
 
     if (remainingDays <= 0) {
-      return `${monthPart}`;
+      return `In ${monthPart}`;
     }
 
     const dayPart = remainingDays === 1 ? "1 day" : `${remainingDays} days`;
 
-    return `${monthPart} ${dayPart}`;
+    return `In ${monthPart} ${dayPart}`;
   }
 
   const years = Math.floor(months / 12);
 
   if (years === 1) {
-    return "one year";
+    return "In one year";
   }
 
-  return `more than ${years} years`;
+  return `In more than ${years} years`;
+};
+
+export const isTodayOrPast = (isoDate: string) => {
+  if (!isoDate) return false;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const target = new Date(`${isoDate}T00:00:00`);
+
+  return target.getTime() <= today.getTime();
 };
