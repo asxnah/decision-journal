@@ -6,7 +6,8 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { reset } from "@/store/slices/decision";
 
-import { formatDate, formatReviewDate } from "./formatDate";
+import { formatDate } from "./formatDate";
+import { formatReviewDate } from "@lib/formatReviewDate";
 
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
