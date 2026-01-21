@@ -40,7 +40,8 @@ export default function Timeline() {
 
             return (
               <DecisionCard
-                key={i}
+                key={decision.id}
+                id={decision.id}
                 decision={decision.decision}
                 thoughts={decision.thoughts}
                 confidence={decision.confidence}

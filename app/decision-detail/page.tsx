@@ -1,5 +1,7 @@
 "use client";
 
+import { v4 as uuidv4 } from "uuid";
+
 import { useRouter } from "next/navigation";
 
 import { useDispatch } from "react-redux";
@@ -45,8 +47,15 @@ export default function DecisionDetail() {
   }
 
   const handleFinish = () => {
+    if (!decision) return;
+
     dispatch(reset());
-    dispatch(add(decision));
+    dispatch(
+      add({
+        ...decision,
+        id: uuidv4(),
+      }),
+    );
     router.push("/timeline");
   };
 

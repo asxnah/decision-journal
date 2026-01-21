@@ -1,6 +1,7 @@
 type ReviewDateType = "preset" | "custom";
 
 export interface Decision {
+  id: string;
   decision: string;
   thoughts: string;
   options: string;
