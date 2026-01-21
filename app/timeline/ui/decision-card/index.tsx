@@ -1,16 +1,17 @@
 import { Decision } from "@shared-types/decision";
+import { useRouter } from "next/navigation";
 
-interface DecisionCardProps
-  extends Pick<
-    Decision,
-    "decision" | "thoughts" | "confidence" | "reviewDate"
-  > {
+interface DecisionCardProps extends Pick<
+  Decision,
+  "id" | "decision" | "thoughts" | "confidence" | "reviewDate"
+> {
   firstItem: boolean;
   lastItem: boolean;
   status: string;
 }
 
 export const DecisionCard = ({
+  id,
   decision,
   thoughts,
   confidence,
@@ -19,8 +20,13 @@ export const DecisionCard = ({
   lastItem,
   status,
 }: DecisionCardProps) => {
+  const router = useRouter();
+
   return (
-    <article className="flex gap-2.5">
+    <article
+      className="flex gap-2.5 cursor-pointer"
+      onClick={() => router.push(`/decision-detail/${id}`)}
+    >
       <div aria-hidden={true} className="flex flex-col items-center">
         {!firstItem && <div className="w-0.5 h-full bg-lightgray"></div>}
         <div className="flex-none w-3 h-3 rounded-full bg-lightgray"></div>

@@ -7,6 +7,8 @@ interface DecisionsData {
 
 const initialState: DecisionsData = {
   data: [],
+export const get = (state: { decisions: DecisionsData }, id: string) => {
+  return state.decisions.data.find((decision) => decision.id === id);
 };
 
 export const decisionSlice = createSlice({
