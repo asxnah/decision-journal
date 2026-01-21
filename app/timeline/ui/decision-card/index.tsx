@@ -7,7 +7,7 @@ interface DecisionCardProps
   > {
   firstItem: boolean;
   lastItem: boolean;
-  pendingReview: boolean;
+  status: string;
 }
 
 export const DecisionCard = ({
@@ -17,7 +17,7 @@ export const DecisionCard = ({
   reviewDate,
   firstItem,
   lastItem,
-  pendingReview,
+  status,
 }: DecisionCardProps) => {
   return (
     <article className="flex gap-2.5">
@@ -54,7 +54,7 @@ export const DecisionCard = ({
 
         <div className="flex items-center justify-between">
           <label className="text-sm text-darkgray" htmlFor="reviewDate">
-            {pendingReview ? "Pending a Review" : "Review Date"}
+            {status}
           </label>
           <time id="reviewDate" dateTime={reviewDate}>
             {reviewDate}

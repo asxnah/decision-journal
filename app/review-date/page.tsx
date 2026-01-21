@@ -9,6 +9,7 @@ import { RootState } from "@/store/rootReducer";
 import { set } from "@/store/slices/decision";
 
 import { getTodayISO } from "@lib/getTodayISO";
+import { calculatePresetDate } from "./calculatePresetDate";
 
 import { Header } from "@widgets/header";
 import { RadioList } from "@ui/list-radio";
@@ -25,6 +26,7 @@ export default function ReviewDate() {
   const { reviewDate, reviewDateType } = useSelector(
     (state: RootState) => state.decision.data
   );
+
   const CUSTOM_OPTION = "Custom date";
   const PRESET_OPTIONS: PresetOption[] = [
     "In 1 month",
@@ -39,20 +41,26 @@ export default function ReviewDate() {
       dispatch(set({ key: "reviewDateType", value: "custom" }));
       dispatch(set({ key: "reviewDate", value: today }));
     } else {
+      let dateString = "";
+
+      if (option === "In 1 month") dateString = calculatePresetDate(1);
+      if (option === "In 3 months") dateString = calculatePresetDate(3);
+      if (option === "In 6 months") dateString = calculatePresetDate(6);
+
       dispatch(set({ key: "reviewDateType", value: "preset" }));
-      dispatch(set({ key: "reviewDate", value: option }));
+      dispatch(set({ key: "reviewDate", value: dateString }));
     }
   };
 
   const selectedOption = useMemo(() => {
-    if (reviewDateType === "custom") {
-      return CUSTOM_OPTION;
-    }
-    if (list.includes(reviewDate)) {
-      return reviewDate;
-    }
+    if (reviewDateType === "custom") return CUSTOM_OPTION;
+
+    if (reviewDate === calculatePresetDate(1)) return "In 1 month";
+    if (reviewDate === calculatePresetDate(3)) return "In 3 months";
+    if (reviewDate === calculatePresetDate(6)) return "In 6 months";
+
     return "";
-  }, [reviewDate, reviewDateType]);
+  }, [reviewDate, reviewDateType, today]);
 
   return (
     <section className="h-full flex flex-col justify-between">

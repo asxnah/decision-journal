@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
@@ -14,7 +14,22 @@ import { DecisionCard } from "./ui/decision-card";
 export default function Timeline() {
   const decisions = useSelector((state: RootState) => state.decisions.data);
   const tabs = ["All", "Active", "Completed", "Successful", "Unsuccessful"];
+
   const [activeTab, setActiveTab] = useState(tabs[0]);
+
+  const filteredDecisions = useMemo(() => {
+    return decisions.filter((decision) =>
+      activeTab === "Active"
+        ? !decision.reviewed
+        : activeTab === "Completed"
+          ? decision.reviewed
+          : activeTab === "Successful"
+            ? decision.successful === true
+            : activeTab === "Unsuccessful"
+              ? decision.successful === false
+              : decision,
+    );
+  }, [activeTab]);
 
   return (
     <section className="h-full w-full">
@@ -24,19 +39,17 @@ export default function Timeline() {
         className="mt-6 h-full overflow-y-auto"
         style={{ height: "calc(100% - 48px - 48px - 48px)" }} // костыль
       >
-        {decisions.length > 0 ? (
-          decisions.map((decision, i) => {
+        {filteredDecisions.length > 0 ? (
+          filteredDecisions.map((decision, i) => {
             const firstItem = i === 0;
-            const lastItem = i === decisions.length - 1;
+            const lastItem = i === filteredDecisions.length - 1;
 
-            const reviewDate =
-              decision.reviewDateType === "preset"
-                ? decision.reviewDate
-                : formatReviewDate(decision.reviewDate);
-
-            const pendingReview =
-              decision.reviewDateType !== "preset" &&
-              isTodayOrPast(decision.reviewDate);
+            const status =
+              isTodayOrPast(decision.reviewDate) && !decision.reviewed
+                ? "Pending a review"
+                : !isTodayOrPast(decision.reviewDate) && !decision.reviewed
+                  ? "Review"
+                  : "Reviewed";
 
             return (
               <DecisionCard
@@ -45,10 +58,10 @@ export default function Timeline() {
                 decision={decision.decision}
                 thoughts={decision.thoughts}
                 confidence={decision.confidence}
-                reviewDate={reviewDate}
+                reviewDate={formatReviewDate(decision.reviewDate)}
                 firstItem={firstItem}
                 lastItem={lastItem}
-                pendingReview={pendingReview}
+                status={status}
               />
             );
           })
