@@ -33,7 +33,7 @@ export const ConfidenceSlider: FC<ConfidenceSliderProps> = ({
 
       if (newValue !== value) onChange(newValue);
     },
-    [min, max, step, value, onChange]
+    [min, max, step, value, onChange],
   );
 
   useEffect(() => {
@@ -67,8 +67,9 @@ export const ConfidenceSlider: FC<ConfidenceSliderProps> = ({
 
   return (
     <div
-      className="grid gap-1"
+      className="grid gap-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
       role="slider"
+      aria-label="Confidence level"
       aria-valuemin={min}
       aria-valuemax={max}
       aria-valuenow={value}

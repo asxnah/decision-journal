@@ -20,6 +20,9 @@ export const DecisionStep = ({
         {"\n"}
         are you facing?
       </h2>
+      <label htmlFor="decision" className="sr-only">
+        Decision
+      </label>
       <Input
         id="decision"
         placeholder="Change jobs"

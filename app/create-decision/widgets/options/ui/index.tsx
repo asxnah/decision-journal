@@ -15,10 +15,13 @@ export const OptionsStep = ({ options, onChange }: OptionsStepProps) => {
       </h2>
       <p>List realistic alternatives you could actually choose.</p>
       <div className="grid gap-2.5">
+        <label htmlFor="options" className="sr-only">
+          Options
+        </label>
         <Input
           variant="textarea"
           bulleted
-          id="thoughts"
+          id="options"
           placeholder={`• Accept the new offer\n• Stay in my current role\n• Take a break and reassess`}
           value={options}
           onChange={onChange}
