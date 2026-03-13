@@ -1,4 +1,4 @@
-#Decision Journal
+# Decision Journal
 
 A modern web app for capturing, reflecting on, and learning from your most important decisions over time. Built with Next.js, it uses Redux + persistence to track current decision forms and a history of past decisions.
 
