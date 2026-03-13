@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**# Decision Journal**
 
-## Getting Started
+A modern web app for capturing, reflecting on, and learning from your most important decisions over time. Built with Next.js, it uses Redux + persistence to track current decision forms and a history of past decisions.
 
-First, run the development server:
+## ✨ Features
 
+- **Multi-step decision creation** at `/create-decision` (conditional rendering via `stepNumber` + dynamic Redux `set({ key, value })` updates)
+- **Persistent state** – decisions saved automatically to browser `localStorage` via Redux Persist (whitelists `decision` and `decisions` slices)
+- **Separate Redux slices**:
+  - `decision`: current decision being edited (form fields + reset)
+  - `decisions`: array of completed decisions (add action)
+- Dedicated routes for deeper reflection:
+  - `/decision-detail`
+  - `/expectations`
+  - `/review-date`
+  - `/timeline`
+- Clean, custom UI with Tailwind CSS 4, custom color theme, and the Epilogue variable font
+- Fully typed in TypeScript
+- Ready for unique IDs (uuid dependency ready for use)
+
+## 🛠 Tech Stack
+
+- **Framework**: Next.js 16 (App Router) + React 19
+- **Language**: TypeScript
+- **State**: Redux Toolkit + react-redux + redux-persist
+- **Styling**: Tailwind CSS 4 + PostCSS
+- **Utilities**: uuid
+- **Linting**: ESLint (Next.js config)
+
+## 🚀 Getting Started
+
+### 1. Clone & Install
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/asxnah/decision-journal.git
+cd decision-journal
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run locally
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Build & Start
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Scripts
+- `dev` – development server
+- `build` – production build
+- `start` – production server
+- `lint` – run ESLint
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+decision-journal/
+├── app/                          # App Router
+│   ├── layout.tsx                # Root layout + metadata + ReduxProvider
+│   ├── page.tsx                  # Home (currently empty placeholder)
+│   ├── globals.css               # Tailwind + Epilogue font + custom theme
+│   ├── reduxProvider.tsx         # <Provider> + <PersistGate>
+│   ├── create-decision/
+│   │   ├── page.tsx              # Multi-step form (stepNumber logic)
+│   │   └── widgets/              # Form-specific widgets
+│   ├── decision-detail/
+│   ├── expectations/
+│   ├── review-date/
+│   └── timeline/
+├── src/
+│   ├── store/
+│   │   ├── index.ts              # configureStore + persistReducer
+│   │   ├── rootReducer.tsx       # combineReducers (decision + decisions)
+│   │   └── slices/
+│   │       ├── decision.tsx      # Current decision form slice
+│   │       └── decisions.tsx     # History list slice (add/reset)
+│   └── widgets/
+│       └── header/               # Shared header component
+├── public/
+│   └── fonts/
+│       └── Epilogue-VariableFont_wght.ttf
+├── next.config.ts
+├── tsconfig.json
+├── package.json
+└── .gitignore
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 State Management Details
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The store is fully persisted:
 
-## Deploy on Vercel
+```ts
+// src/store/index.ts (key excerpts)
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["decision", "decisions"],
+};
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `decision` slice → dynamic field updates + reset (used by create-decision form)
+- `decisions` slice → `add` action that pushes completed decisions to the array
+- Types exported: `RootState`, `AppDispatch`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All state survives page refreshes thanks to `PersistGate` and `redux-persist`.
+
+## 📝 Metadata & Branding
+
+- Title: **Decision Journal**
+- Description: "Capture, reflect on and learn from your most important decisions over time"
+- Font: **Epilogue** (variable weight)
+- Theme colors defined in `globals.css` (black/gray palette)
+
+## 📌 Notes / Roadmap
+
+- Home page (`/`) is currently a minimal placeholder — ready for a dashboard or decision list.
+- Several route pages are in early stages (widgets and forms are being built).
+- No backend yet (fully client-side with local persistence — perfect for personal use).
+- Easy to extend: add delete/update actions, export to JSON, charts for timeline, etc.
