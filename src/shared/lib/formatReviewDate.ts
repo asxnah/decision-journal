@@ -37,7 +37,7 @@ export const formatReviewDate = (isoDate: string) => {
   }
 
   const remainingDays = Math.ceil(
-    (target.getTime() - monthAnchor.getTime()) / (1000 * 60 * 60 * 24)
+    (target.getTime() - monthAnchor.getTime()) / (1000 * 60 * 60 * 24),
   );
 
   if (months < 12) {
@@ -67,7 +67,8 @@ export const isTodayOrPast = (isoDate: string) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const target = new Date(`${isoDate}T00:00:00`);
+  const [year, month, day] = isoDate.split("-").map(Number);
+  const target = new Date(year, month - 1, day);
 
   return target.getTime() <= today.getTime();
 };
