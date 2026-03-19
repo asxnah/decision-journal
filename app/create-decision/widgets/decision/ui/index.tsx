@@ -30,7 +30,7 @@ export const DecisionStep = ({
         onChange={(value) => onDecisionChange(value)}
       />
       <div className="grid gap-2.5">
-        <h4 className="">What makes this decision important at this moment?</h4>
+        <h4>What makes this decision important at this moment?</h4>
         <Input
           variant="textarea"
           id="thoughts"
