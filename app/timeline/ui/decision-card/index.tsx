@@ -1,5 +1,4 @@
 import { Decision } from "@shared-types/decision";
-import { useRouter } from "next/navigation";
 
 interface DecisionCardProps extends Pick<
   Decision,
@@ -8,6 +7,7 @@ interface DecisionCardProps extends Pick<
   firstItem: boolean;
   lastItem: boolean;
   status: string;
+  onClick: (id: string) => void;
 }
 
 export const DecisionCard = ({
@@ -19,13 +19,12 @@ export const DecisionCard = ({
   firstItem,
   lastItem,
   status,
+  onClick,
 }: DecisionCardProps) => {
-  const router = useRouter();
-
   return (
     <article
       className="flex gap-2.5 cursor-pointer"
-      onClick={() => router.push(`/decision-detail/${id}`)}
+      onClick={() => onClick(id)}
     >
       <div aria-hidden={true} className="flex flex-col items-center">
         <div

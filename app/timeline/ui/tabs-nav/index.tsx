@@ -6,7 +6,7 @@ interface TabsNavProps {
 
 export const TabsNav = ({ tabs, activeTab, onChange }: TabsNavProps) => {
   return (
-    <nav className="w-full overflow-x-auto">
+    <nav className="w-full overflow-x-auto shrink-0">
       <ul className="flex">
         {tabs.map((tab) => (
           <li

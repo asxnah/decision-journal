@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
@@ -12,6 +13,8 @@ import { TabsNav } from "./ui/tabs-nav";
 import { DecisionCard } from "./ui/decision-card";
 
 export default function Timeline() {
+  const router = useRouter();
+
   const decisions = useSelector((state: RootState) => state.decisions.data);
   const tabs = ["All", "Active", "Completed", "Successful", "Unsuccessful"];
 
@@ -32,13 +35,10 @@ export default function Timeline() {
   }, [activeTab]);
 
   return (
-    <section className="h-full w-full">
+    <section className="h-full w-full flex flex-col">
       <Header heading="Timeline" />
       <TabsNav tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
-      <section
-        className="mt-6 h-full overflow-y-auto"
-        style={{ height: "calc(100% - 48px - 48px - 48px)" }} // костыль
-      >
+      <section className="mt-6 h-full overflow-y-auto">
         {filteredDecisions.length > 0 ? (
           filteredDecisions.map((decision, i) => {
             const firstItem = i === 0;
@@ -51,10 +51,12 @@ export default function Timeline() {
                   ? "Review"
                   : "Reviewed";
 
+            const id = decision.id;
+
             return (
               <DecisionCard
-                key={decision.id}
-                id={decision.id}
+                key={id}
+                id={id}
                 decision={decision.decision}
                 thoughts={decision.thoughts}
                 confidence={decision.confidence}
@@ -62,6 +64,7 @@ export default function Timeline() {
                 firstItem={firstItem}
                 lastItem={lastItem}
                 status={status}
+                onClick={() => router.push(`/decision-detail/${id}`)}
               />
             );
           })
