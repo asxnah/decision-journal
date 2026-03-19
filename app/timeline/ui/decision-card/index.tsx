@@ -2,7 +2,7 @@ import { Decision } from "@shared-types/decision";
 
 interface DecisionCardProps extends Pick<
   Decision,
-  "id" | "decision" | "thoughts" | "confidence" | "reviewDate"
+  "id" | "decision" | "thoughts" | "confidence" | "reviewDate" | "successful"
 > {
   firstItem: boolean;
   lastItem: boolean;
@@ -16,6 +16,7 @@ export const DecisionCard = ({
   thoughts,
   confidence,
   reviewDate,
+  successful,
   firstItem,
   lastItem,
   status,
@@ -63,9 +64,14 @@ export const DecisionCard = ({
           <label className="text-sm text-darkgray" htmlFor="reviewDate">
             {status}
           </label>
-          <time id="reviewDate" dateTime={reviewDate}>
-            {reviewDate}
-          </time>
+
+          {status === "Reviewed" ? (
+            <span>{successful ? "Successful" : "Unsuccessful"}</span>
+          ) : (
+            <time id="reviewDate" dateTime={reviewDate}>
+              {reviewDate}
+            </time>
+          )}
         </div>
       </div>
     </article>

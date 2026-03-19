@@ -61,6 +61,7 @@ export default function Timeline() {
                 thoughts={decision.thoughts}
                 confidence={decision.confidence}
                 reviewDate={formatReviewDate(decision.reviewDate)}
+                successful={decision.successful}
                 firstItem={firstItem}
                 lastItem={lastItem}
                 status={status}
