@@ -29,11 +29,6 @@ export default function Home() {
         <li>
           <Link href="/timeline">timeline</Link>
         </li>
-        <li>
-          <button className="mt-2 underline" onClick={() => dispatch(reset())}>
-            reset all decisions
-          </button>
-        </li>
       </ul>
     </nav>
   );
