@@ -1,0 +1,43 @@
+{
+  "data": [
+    {
+      "id": "2a39f8fb-7e5a-45d2-ad4f-b2f991d74ee4",
+      "reviewed": false,
+      "successful": null,
+      "decision": "Switch to a Mediterranean-based diet",
+      "thoughts": "Focused on improving long-term health and daily energy.",
+      "options": "• Follow strict plan\n• Replace snacks\n• Use delivery service",
+      "confidence": 78,
+      "expectations": "Better focus and physical health markers.",
+      "reviewDateType": "custom",
+      "reviewDate": "2026-02-28",
+      "createdAt": "2026-01-07"
+    },
+    {
+      "id": "696d8d3b-df97-4e04-b6b1-1b5a48d1cc06",
+      "reviewed": false,
+      "successful": null,
+      "decision": "Start a 15-minute daily meditation practice",
+      "thoughts": "Need to manage work stress and improve emotional regulation.",
+      "options": "• Use an app\n• Box breathing\n• Group classes",
+      "confidence": 85,
+      "expectations": "Reduced reactivity to stressful situations.",
+      "reviewDateType": "custom",
+      "reviewDate": "2026-07-10",
+      "createdAt": "2026-01-10"
+    },
+    {
+      "id": "941d61bd-0703-460a-a0d6-a7247ad40518",
+      "reviewed": true,
+      "successful": true,
+      "decision": "Commit to a dedicated reading hour every evening",
+      "thoughts": "Digital detox through deep reading before sleep.",
+      "options": "• Physical books\n• Audiobooks\n• Weekend sprints",
+      "confidence": 72,
+      "expectations": "Improved vocabulary and better sleep quality.",
+      "reviewDateType": "custom",
+      "reviewDate": "2026-01-10",
+      "createdAt": "2026-01-10"
+    }
+  ]
+}
