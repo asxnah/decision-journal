@@ -42,7 +42,7 @@ export const DecisionDetails = ({ decision }: DecisionDetailProps) => {
           <h2 id="options-heading" className="text-xl font-medium">
             Options considered
           </h2>
-          <p className="text-darkgray list-disc pl-5 space-y-0">
+          <ul className="text-darkgray list-disc pl-5 space-y-0">
             {decision.options
               .split("•")
               .map((s) => s.trim())
@@ -52,7 +52,7 @@ export const DecisionDetails = ({ decision }: DecisionDetailProps) => {
                   {option}
                 </li>
               ))}
-          </p>
+          </ul>
         </section>
       </div>
 
