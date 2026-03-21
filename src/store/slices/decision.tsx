@@ -7,6 +7,9 @@ interface DecisionData {
 
 const initialState: DecisionData = {
   data: {
+    id: "",
+    reviewed: false,
+    successful: false,
     decision: "",
     thoughts: "",
     options: "",
@@ -24,7 +27,7 @@ export const decisionSlice = createSlice({
   reducers: {
     set: <K extends keyof Decision>(
       state: DecisionData,
-      action: PayloadAction<{ key: K; value: Decision[K] }>
+      action: PayloadAction<{ key: K; value: Decision[K] }>,
     ) => {
       const { key, value } = action.payload;
       state.data[key] = value;
