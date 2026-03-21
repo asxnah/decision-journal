@@ -13,13 +13,15 @@ import { DecisionDetails } from "@ui/decision-details";
 export default function DecisionDetail() {
   const router = useRouter();
 
+  const goToTimeline = () => router.push("/timeline");
+
   const { id } = useParams();
-  if (!id || Array.isArray(id)) return router.push("/timeline");
+  if (!id || Array.isArray(id)) return goToTimeline();
 
   const decision = useSelector((state: RootState) => getSingle(state, id));
 
-  if (!decision) {
-    return <p className="text-darkgray">No decision found.</p>;
+  if (!decision?.decision) {
+    return goToTimeline();
   }
 
   return (
