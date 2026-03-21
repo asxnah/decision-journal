@@ -10,6 +10,9 @@
   --color-black-hover: #292e33;
 }
 
+@source "./app/**/*.{js,ts,jsx,tsx}";
+@source "./src/**/*.{js,ts,jsx,tsx}";
+
 @font-face {
   font-family: "Epilogue";
   src: url("/fonts/Epilogue-VariableFont_wght.ttf") format("truetype");
