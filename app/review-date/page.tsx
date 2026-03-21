@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store";
 import { RootState } from "@/store/rootReducer";
-import { set } from "@/store/slices/decision";
+import { setValueByKey } from "@/store/slices/decision";
 
 import { getTodayISO } from "@lib/getTodayISO";
 import { calculatePresetDate } from "./calculatePresetDate";
@@ -24,7 +24,7 @@ export default function ReviewDate() {
   const today = useMemo(() => getTodayISO(), []);
 
   const { reviewDate, reviewDateType } = useSelector(
-    (state: RootState) => state.decision.data
+    (state: RootState) => state.decision.data,
   );
 
   const CUSTOM_OPTION = "Custom date";
@@ -38,8 +38,8 @@ export default function ReviewDate() {
 
   const handleRadioChange = (option: string) => {
     if (option === CUSTOM_OPTION) {
-      dispatch(set({ key: "reviewDateType", value: "custom" }));
-      dispatch(set({ key: "reviewDate", value: today }));
+      dispatch(setValueByKey({ key: "reviewDateType", value: "custom" }));
+      dispatch(setValueByKey({ key: "reviewDate", value: today }));
     } else {
       let dateString = "";
 
@@ -47,8 +47,8 @@ export default function ReviewDate() {
       if (option === "In 3 months") dateString = calculatePresetDate(3);
       if (option === "In 6 months") dateString = calculatePresetDate(6);
 
-      dispatch(set({ key: "reviewDateType", value: "preset" }));
-      dispatch(set({ key: "reviewDate", value: dateString }));
+      dispatch(setValueByKey({ key: "reviewDateType", value: "preset" }));
+      dispatch(setValueByKey({ key: "reviewDate", value: dateString }));
     }
   };
 
@@ -88,7 +88,7 @@ export default function ReviewDate() {
                 inputType="date"
                 value={reviewDate}
                 onChange={(value) =>
-                  dispatch(set({ key: "reviewDate", value }))
+                  dispatch(setValueByKey({ key: "reviewDate", value }))
                 }
                 aria-describedby="reviewDate-help"
               />
@@ -103,7 +103,7 @@ export default function ReviewDate() {
       <Button
         content="Next"
         onClick={() => {
-          dispatch(set({ key: "createdAt", value: today }));
+          dispatch(setValueByKey({ key: "createdAt", value: today }));
           router.push("/decision-detail");
         }}
         disabled={reviewDate.trim() === ""}

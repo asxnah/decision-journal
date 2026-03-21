@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store";
 import { RootState } from "@/store/rootReducer";
-import { set } from "@/store/slices/decision";
+import { setValueByKey } from "@/store/slices/decision";
 
 import { Header } from "@widgets/header";
 import { ProgressBar } from "@ui/progressbar";
@@ -22,7 +22,7 @@ export default function CreateDecision() {
 
   const [stepNumber, setStepNumber] = useState<1 | 2 | 3>(1);
   const { decision, thoughts, options, confidence } = useSelector(
-    (state: RootState) => state.decision.data
+    (state: RootState) => state.decision.data,
   );
 
   const buttonDisabled = useMemo(() => {
@@ -47,7 +47,8 @@ export default function CreateDecision() {
   };
 
   const handleNavigation = (number: 1 | 2 | 3) => {
-    if (number === 2 && decision.trim() === "" && thoughts.trim() === "") return;
+    if (number === 2 && decision.trim() === "" && thoughts.trim() === "")
+      return;
     if (number === 3 && options.trim() === "") return;
     setStepNumber(number);
   };
@@ -67,10 +68,10 @@ export default function CreateDecision() {
             decision={decision}
             thoughts={thoughts}
             onDecisionChange={(value) =>
-              dispatch(set({ key: "decision", value }))
+              dispatch(setValueByKey({ key: "decision", value }))
             }
             onThoughtsChange={(value) =>
-              dispatch(set({ key: "thoughts", value }))
+              dispatch(setValueByKey({ key: "thoughts", value }))
             }
           />
         )}
@@ -78,14 +79,18 @@ export default function CreateDecision() {
         {stepNumber === 2 && (
           <OptionsStep
             options={options}
-            onChange={(value) => dispatch(set({ key: "options", value }))}
+            onChange={(value) =>
+              dispatch(setValueByKey({ key: "options", value }))
+            }
           />
         )}
 
         {stepNumber === 3 && (
           <FeelingsStep
             confidence={confidence}
-            onChange={(value) => dispatch(set({ key: "confidence", value }))}
+            onChange={(value) =>
+              dispatch(setValueByKey({ key: "confidence", value }))
+            }
           />
         )}
       </div>

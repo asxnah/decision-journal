@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
-import { reset } from "@/store/slices/decision";
+import { resetCurrent } from "@/store/slices/decision";
 import { add } from "@/store/slices/decisions";
 
 import { useSelector } from "react-redux";
@@ -21,21 +21,23 @@ export default function DecisionDetail() {
   const dispatch = useDispatch<AppDispatch>();
   const decision = useSelector((state: RootState) => state.decision.data);
 
-  if (!decision) {
-    return <p className="text-darkgray">No decision found.</p>;
+  const goToTimeline = () => router.push("/timeline");
+
+  if (!decision.decision) {
+    goToTimeline();
   }
 
   const handleFinish = () => {
-    if (!decision) return;
+    if (!decision.decision) goToTimeline();
 
-    dispatch(reset());
+    dispatch(resetCurrent());
     dispatch(
       add({
         ...decision,
         id: uuidv4(),
       }),
     );
-    router.push("/timeline");
+    goToTimeline();
   };
 
   return (

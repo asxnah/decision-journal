@@ -25,16 +25,16 @@ export const decisionSlice = createSlice({
   name: "decision",
   initialState,
   reducers: {
-    set: <K extends keyof Decision>(
+    setValueByKey: <K extends keyof Decision>(
       state: DecisionData,
       action: PayloadAction<{ key: K; value: Decision[K] }>,
     ) => {
       const { key, value } = action.payload;
       state.data[key] = value;
     },
-    reset: () => initialState,
+    resetCurrent: () => initialState,
   },
 });
 
-export const { set, reset } = decisionSlice.actions;
+export const { setValueByKey, resetCurrent } = decisionSlice.actions;
 export default decisionSlice.reducer;

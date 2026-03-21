@@ -2,56 +2,37 @@
 
 import { Decision } from "@/shared/types/decision";
 
-import { reset as resetAll, set as setAll } from "@/store/slices/decisions";
-import { reset, set } from "@/store/slices/decision";
 import { useDispatch } from "react-redux";
+import { resetAll, set } from "@/store/slices/decisions";
+import { resetCurrent, setValueByKey } from "@/store/slices/decision";
 
-import { data } from "./mocks.json";
-const DECISIONS = data as Decision[];
+import data from "./mocks.json";
+const DECISIONS = data.decisions as Decision[];
 
 export const DevTools = () => {
   const dispatch = useDispatch();
 
   const useDevActions = (action: "set" | "reset") => {
     if (action === "set") {
-      dispatch(setAll(DECISIONS));
+      dispatch(set(DECISIONS));
 
       dispatch(
-        set({ key: "id", value: "2a39f8fb-7e5a-45d2-ad4f-b2f991d74ee4" }),
-      );
-      dispatch(set({ key: "reviewed", value: false }));
-      dispatch(set({ key: "successful", value: null }));
-      dispatch(
-        set({ key: "decision", value: "Switch to a Mediterranean-based diet" }),
-      );
-      dispatch(
-        set({
-          key: "thoughts",
-          value: "Focused on improving long-term health and daily energy.",
+        setValueByKey({
+          key: "id",
+          value: "2a39f8fb-7e5a-45d2-ad4f-b2f991d74ee4",
         }),
       );
       dispatch(
-        set({
-          key: "options",
-          value:
-            "• Follow strict plan\n• Replace snacks\n• Use delivery service",
+        setValueByKey({
+          key: "decision",
+          value: "Switch to a Mediterranean-based diet",
         }),
       );
-      dispatch(set({ key: "confidence", value: 78 }));
-      dispatch(
-        set({
-          key: "expectations",
-          value: "Better focus and physical health markers.",
-        }),
-      );
-      dispatch(set({ key: "reviewDateType", value: "custom" }));
-      dispatch(set({ key: "reviewDate", value: "2026-02-28" }));
-      dispatch(set({ key: "createdAt", value: "2026-01-07" }));
     }
 
     if (action === "reset") {
       dispatch(resetAll());
-      dispatch(reset());
+      dispatch(resetCurrent());
     }
 
     location.reload();

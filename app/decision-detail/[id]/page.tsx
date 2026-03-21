@@ -4,7 +4,7 @@ import { useRouter, useParams } from "next/navigation";
 
 import { RootState } from "@/store/rootReducer";
 import { useSelector } from "react-redux";
-import { get } from "@/store/slices/decisions";
+import { getSingle } from "@/store/slices/decisions";
 
 import { Button } from "@ui/button";
 import { Header } from "@widgets/header";
@@ -16,7 +16,7 @@ export default function DecisionDetail() {
   const { id } = useParams();
   if (!id || Array.isArray(id)) return router.push("/timeline");
 
-  const decision = useSelector((state: RootState) => get(state, id));
+  const decision = useSelector((state: RootState) => getSingle(state, id));
 
   if (!decision) {
     return <p className="text-darkgray">No decision found.</p>;

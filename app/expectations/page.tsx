@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store";
 import { RootState } from "@/store/rootReducer";
-import { set } from "@/store/slices/decision";
+import { setValueByKey } from "@/store/slices/decision";
 
 import { Input } from "@ui/input";
 import { Button } from "@ui/button";
@@ -17,7 +17,7 @@ export default function Expectations() {
   const dispatch = useDispatch<AppDispatch>();
 
   const { expectations } = useSelector(
-    (state: RootState) => state.decision.data
+    (state: RootState) => state.decision.data,
   );
   const [localExpectations, setLocalExpectations] =
     useState<string>(expectations);
@@ -43,7 +43,12 @@ export default function Expectations() {
               value={localExpectations}
               onChange={setLocalExpectations}
               onBlur={() =>
-                dispatch(set({ key: "expectations", value: localExpectations }))
+                dispatch(
+                  setValueByKey({
+                    key: "expectations",
+                    value: localExpectations,
+                  }),
+                )
               }
               aria-describedby="expectations-help"
             />
